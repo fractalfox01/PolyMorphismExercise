@@ -20,9 +20,9 @@ class Car {
     private int wheels;
     private int doors;
 
-    public Car(String name, boolean engine, int cylinders, int doors){
+    public Car(String name, int cylinders){
         this.name = name;
-        this.engine = engine;
+        this.engine = engine = true;
         this.cylinders = cylinders;
         this.wheels = 4;
         this.doors = doors;
@@ -48,20 +48,22 @@ class Car {
         return doors;
     }
 
-    public void startEngine(){
-        System.out.println("Engine on " + name + " is being started");
+    public String startEngine(){
+        return ("Car --> Engine on " + name + " is being started");
     }
-    public void accelerate(){
-        System.out.println(name + " is accelerating");
+
+    public String accelerate(){
+        return ("Car --> " + name + " is accelerating");
     }
-    public void brake(){
-        System.out.println(name + " is braking");
+
+    public String brake(){
+        return ("Car --> " + name + " is braking");
     }
 }
 
 class Taurus extends Car{
     public Taurus(){
-        super("Taurus", false, 6,4);
+        super("Taurus", 6);
     }
 
     @Override
@@ -72,7 +74,7 @@ class Taurus extends Car{
 
 class Ram1500 extends Car{
     public Ram1500(){
-        super("Ram1500", true,8,2);
+        super("Ram1500", 8);
     }
 
     @Override
@@ -80,20 +82,24 @@ class Ram1500 extends Car{
         return "Ram1500";
     }
     @Override
-    public void startEngine(){
+    public String startEngine(){
         if(!getEngine()){
-            System.out.println("oops, No engine in " + getName());
-            System.out.println("Engine is " + getEngine());
+            return ("oops, No engine in " + getName() + "Engine is " + getEngine());
         }
         else{
-            System.out.println("Starting engine on " + getName());
+            return ("Ram1500 --> Starting engine on " + getName());
         }
+    }
+
+    @Override
+    public String accelerate() {
+        return getClass().getSimpleName() + " --> accelerating";
     }
 }
 
 class Jeep extends Car{
     public Jeep(){
-        super("Jeep", true, 6,2);
+        super("Jeep", 6);
     }
 
     @Override
@@ -104,21 +110,21 @@ class Jeep extends Car{
 public class Main {
     public static void main(String[] args) {
 
-
         Car taurus = new Taurus();
         System.out.println(taurus.getName());
-        taurus.startEngine();
+        System.out.println(taurus.startEngine());
 
         System.out.println();
 
         Car jeep = new Jeep();
         System.out.println(jeep.getName());
-        jeep.startEngine();
+        System.out.println(jeep.startEngine());
 
         System.out.println();
 
         Car ram = new Ram1500();
         System.out.println(ram.getName());
-        ram.startEngine();
+        System.out.println(ram.startEngine());
+        System.out.println(ram.accelerate());
     }
 }
